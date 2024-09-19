@@ -1,0 +1,26 @@
+{"pets": [
+    {
+        "appearance": "CIRCLE",
+        "personality": "IMPULSIVE",
+        "identity": "12345",
+        "name": "Snow",
+        "stomach": 0,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 10,
+        "story": "Snow was born in winter.",
+        "stomachStatus": "hungry"
+    },
+    {
+        "appearance": "SQUARE",
+        "personality": "KIND",
+        "identity": "54321",
+        "name": "Fireballs",
+        "stomach": 0,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 12,
+        "story": "Fireballs was born in lava.",
+        "stomachStatus": "hungry"
+    }
+]}

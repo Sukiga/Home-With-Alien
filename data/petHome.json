@@ -1,0 +1,38 @@
+{"pets": [
+    {
+        "appearance": "CIRCLE",
+        "personality": "IMPULSIVE",
+        "identity": "12345",
+        "name": "Snow",
+        "stomach": 0,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 10,
+        "story": "Snow was born in winter.",
+        "stomachStatus": "hungry"
+    },
+    {
+        "appearance": "SQUARE",
+        "personality": "KIND",
+        "identity": "ekwjfn",
+        "name": "Suki",
+        "stomach": 0,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 23,
+        "story": "UBC",
+        "stomachStatus": "hungry"
+    },
+    {
+        "appearance": "CIRCLE",
+        "personality": "KIND",
+        "identity": "ekfn",
+        "name": "Sophie",
+        "stomach": 0,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 23,
+        "story": "trash",
+        "stomachStatus": "hungry"
+    }
+]}
