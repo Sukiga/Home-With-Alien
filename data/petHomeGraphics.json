@@ -9,18 +9,30 @@
         "accessory": "PLAIN",
         "age": 10,
         "story": "Snow was found near the inventory.",
-        "stomachStatus": "hungry"
+        "stomachStatus": "half-full"
     },
     {
         "appearance": "PETTYPEONE",
         "personality": "SHY",
         "identity": "002",
         "name": "Suki",
+        "stomach": 10,
+        "livingStatus": "alive",
+        "accessory": "PLAIN",
+        "age": 18,
+        "story": "I found her near the inventory.",
+        "stomachStatus": "half-full"
+    },
+    {
+        "appearance": "PETTYPETWO",
+        "personality": "KIND",
+        "identity": "003",
+        "name": "Sophie",
         "stomach": 0,
         "livingStatus": "alive",
         "accessory": "PLAIN",
-        "age": 1000,
-        "story": "I found her in the trash.",
+        "age": 16,
+        "story": "I found her beside Suki.",
         "stomachStatus": "hungry"
     }
 ]}

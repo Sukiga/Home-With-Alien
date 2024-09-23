@@ -129,6 +129,15 @@ public class MainGUI {
     FeedingScreenHandler fsHandler = new FeedingScreenHandler();
     JLayeredPane feedingPanel = new JLayeredPane();
 
+    JButton actionFeedButton;
+    JPanel actionFeedButtonPanel;
+
+    ActionFeedingClickerListener afcListener = new ActionFeedingClickerListener();
+
+    ActionFeedingSelectedPet afsPet = new ActionFeedingSelectedPet();
+
+    Alien selectedPet;
+
     // fields for Snow Page
     SnowScreenHandler ssHandler = new SnowScreenHandler();
     JLayeredPane snowPanel = new JLayeredPane();
@@ -560,6 +569,7 @@ public class MainGUI {
         actionSnowButtonPanel.add(actionSnowButton, BorderLayout.CENTER);
         actionSnowButton.addActionListener(new AppearanceClickerListener(Appearance.SNOW));
         actionSnowButton.addActionListener(aacListener);
+        actionSnowButton.addActionListener(afsPet);
         actionSnowButton.setActionCommand("snow");
     }
 
@@ -570,6 +580,7 @@ public class MainGUI {
         actionNewPetButtonPanel.add(actionNewPetButton, BorderLayout.CENTER);
         actionNewPetButton.addActionListener(new AppearanceClickerListener(Appearance.PETTYPEONE));
         actionNewPetButton.addActionListener(aacListener);
+        actionNewPetButton.addActionListener(afsPet);
         actionNewPetButton.setActionCommand("one");
     }
 
@@ -580,6 +591,7 @@ public class MainGUI {
         actionNewPetTwoButtonPanel.add(actionNewPetTwoButton, BorderLayout.CENTER);
         actionNewPetTwoButton.addActionListener(new AppearanceClickerListener(Appearance.PETTYPETWO));
         actionNewPetTwoButton.addActionListener(aacListener);
+        actionNewPetTwoButton.addActionListener(afsPet);
         actionNewPetTwoButton.setActionCommand("two");
     }
 
@@ -675,6 +687,18 @@ public class MainGUI {
         mainButtonSetter();
         mainButtonPanelsSetter(feedingPanel);
         actionButtonsSetter(feedingPanel);
+        actionFeedButtonSetter();
+
+    }
+
+    public void actionFeedButtonSetter() {
+        actionFeedButton = new JButton();
+        actionFeedButtonPanel = new JPanel(new BorderLayout());
+        actionFeedButtonPanel.setBounds(390, 120, 180, 120);
+        actionFeedButton.setIcon(new ImageIcon("src/main/ui/Pics/Feed Button.png"));
+        actionFeedButtonPanel.add(actionFeedButton, BorderLayout.CENTER);
+        actionFeedButton.addActionListener(afcListener);
+        feedingPanel.add(actionFeedButtonPanel, Integer.valueOf(3));
 
     }
 
@@ -682,6 +706,7 @@ public class MainGUI {
 
     public void createSnowScreen() {
         showOnlyPanel(snowPanel);
+        cleanPaneSetter(snowPanel);
 
         snowPanel.setBounds(0,0,640, 360);
         snowPanel.setLayout(null);
@@ -784,7 +809,7 @@ public class MainGUI {
     public void showPetStomachStatus(int n) {
         String stomachStatus = petHome.getPets().get(n).getStomachStatus();
         petStomachStatusArea = new JTextArea("STOMACH STATUS: " + stomachStatus);
-        petStomachStatusArea.setBounds(330, 185, 170, 20);
+        petStomachStatusArea.setBounds(330, 185, 250, 20);
         petStomachStatusArea.setLineWrap(true);
         petStomachStatusArea.setForeground(Color.BLACK);
         petStomachStatusArea.setFocusable(false);
@@ -959,6 +984,7 @@ public class MainGUI {
 
     public void createNewPetScreen() {
         showOnlyPanel(newPetPanel);
+        cleanPaneSetter(newPetPanel);
 
         newPetPanel.setBounds(120,40,300, 160);
         newPetPanel.setLayout(null);
@@ -989,6 +1015,7 @@ public class MainGUI {
 
     public void createNewPetTwoScreen() {
         showOnlyPanel(newPetTwoPanel);
+        cleanPaneSetter(newPetTwoPanel);
 
         newPetTwoPanel.setBounds(120,40,300, 160);
         newPetTwoPanel.setLayout(null);
@@ -1193,7 +1220,43 @@ public class MainGUI {
         }
     }
 
-    
+    private class ActionFeedingSelectedPet implements ActionListener {
+
+        public ActionFeedingSelectedPet() {
+        }
+
+        @Override 
+        public void actionPerformed(ActionEvent event) {
+            String yourChoice = event.getActionCommand();
+
+            switch (yourChoice) {
+                case "snow":
+                    selectedPet = petHome.getFirstPet();
+                    break;
+                case "one":
+                    selectedPet = newPet;
+                    break;
+                case "two":
+                    selectedPet = newPet2;
+                    break;
+            }
+        }
+    }
+
+    private class ActionFeedingClickerListener implements ActionListener {
+
+        public ActionFeedingClickerListener() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            selectedPet.feedPet(5);
+            System.out.println(selectedPet.getStomach());
+            System.out.println(selectedPet.getStomachStatus());
+            System.out.println(selectedPet.getName());
+            createPetHomeMainScreen();
+        }
+    }
 
     private class PersonalityClickerListener implements ActionListener {
         private Personality personalityType;
