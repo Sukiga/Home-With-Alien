@@ -127,6 +127,7 @@ public class MainGUI {
 
     ImageIcon newPetImage = null;
 
+    AccessorizeSubmitButtonListener asbListener = new AccessorizeSubmitButtonListener();
     ActionAppearanceChoiceListener aacListener;
 
     // fields for feeding a pet page
@@ -142,6 +143,7 @@ public class MainGUI {
 
     Alien selectedPet;
     String selectedAppearance = "";
+    String selectedStringAppearance = "";
 
 
 
@@ -623,7 +625,7 @@ public class MainGUI {
         actionSubmitButtonPanel.setBackground(Color.WHITE);
         actionSubmitButtonPanel.setBounds(360, 200, 240, 40);
         accessorizePanel.add(actionSubmitButtonPanel, Integer.valueOf(2));
-        actionSubmitButton.addActionListener(new AccessorizeSubmitButtonListener());
+        actionSubmitButton.addActionListener(asbListener);
         
     }
      
@@ -640,6 +642,7 @@ public class MainGUI {
         accessorizePanel.add(actionBlackButtonPanel, Integer.valueOf(2));
         actionBlackButton.setActionCommand("black");
         actionBlackButton.addActionListener(aacListener);
+        
     }
 
     public void actionAccessoryWhiteButtonSetter() {
@@ -1261,22 +1264,27 @@ public class MainGUI {
                     break;
                 case "black":
                     selectedAppearance = givePetAccessorized(Accessory.BLACK);
+                    selectedStringAppearance = "black";
                     newPetImage = new ImageIcon(selectedAppearance);
                     break;
                 case "white":
                     selectedAppearance = givePetAccessorized(Accessory.WHITE);
+                    selectedStringAppearance = "white";
                     newPetImage = new ImageIcon(selectedAppearance);
                     break;
                 case "silver":
                     selectedAppearance = givePetAccessorized(Accessory.SILVER);
+                    selectedStringAppearance = "silver";
                     newPetImage = new ImageIcon(selectedAppearance);
                     break;
                 case "gold":
                     selectedAppearance = givePetAccessorized(Accessory.GOLD);
+                    selectedStringAppearance = "gold";
                     newPetImage = new ImageIcon(selectedAppearance);
                     break;
                 case "plain":
                     selectedAppearance = givePetAccessorized(Accessory.PLAIN);
+                    selectedStringAppearance = "plain";
                     newPetImage = new ImageIcon(selectedAppearance);
                     break;
             }
@@ -1311,8 +1319,8 @@ public class MainGUI {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            selectedPet.setAccessory(selectedAppearance);
-            System.out.println(petHome.getFirstPet().getAccessory());
+            selectedPet.setAccessory(selectedStringAppearance);
+            System.out.println(selectedAppearance);
             createPetHomeMainScreen();
         }
     }
@@ -1345,9 +1353,7 @@ public class MainGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             selectedPet.feedPet(5);
-            System.out.println(selectedPet.getStomach());
-            System.out.println(selectedPet.getStomachStatus());
-            System.out.println(selectedPet.getName());
+            System.out.println(petHome.getFirstPet().getStomach());
             createPetHomeMainScreen();
         }
     }
