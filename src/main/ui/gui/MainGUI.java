@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.alien.Accessory;
 import model.alien.Alien;
 import model.alien.Appearance;
 import model.petfood.Inventory;
@@ -111,6 +112,8 @@ public class MainGUI {
     AccessoryScreenHandler asHandler = new AccessoryScreenHandler();
     JLayeredPane accessorizePanel = new JLayeredPane();
 
+    JButton actionSubmitButton;
+    JPanel actionSubmitButtonPanel;
     JButton actionBlackButton;
     JPanel actionBlackButtonPanel;
     JButton actionWhiteButton;
@@ -122,6 +125,7 @@ public class MainGUI {
     JButton actionSilverButton;
     JPanel actionSilverButtonPanel;
 
+    ImageIcon newPetImage = null;
 
     ActionAppearanceChoiceListener aacListener;
 
@@ -137,6 +141,9 @@ public class MainGUI {
     ActionFeedingSelectedPet afsPet = new ActionFeedingSelectedPet();
 
     Alien selectedPet;
+    String selectedAppearance = "";
+
+
 
     // fields for Snow Page
     SnowScreenHandler ssHandler = new SnowScreenHandler();
@@ -601,8 +608,24 @@ public class MainGUI {
         actionAccessorySilverButtonSetter();
         actionAccessoryGoldButtonSetter();
         actionAccessoryPlainButtonSetter();
+        actionAccessorySubmitButtonSetter();
     }
 
+    public void actionAccessorySubmitButtonSetter() {
+        actionSubmitButtonPanel = new JPanel();
+        actionSubmitButton = new JButton("Accessorize");
+        actionSubmitButton.setFont(new Font("DialogInput", Font.ITALIC, 24));
+        actionSubmitButton.setBackground(Color.PINK);
+        actionSubmitButton.setOpaque(true);
+        actionSubmitButton.setForeground(Color.WHITE);
+        actionSubmitButton.setBorderPainted(false);
+        actionSubmitButtonPanel.add(actionSubmitButton, BorderLayout.CENTER);
+        actionSubmitButtonPanel.setBackground(Color.WHITE);
+        actionSubmitButtonPanel.setBounds(360, 200, 240, 40);
+        accessorizePanel.add(actionSubmitButtonPanel, Integer.valueOf(2));
+        actionSubmitButton.addActionListener(new AccessorizeSubmitButtonListener());
+        
+    }
      
     public void actionAccessoryBlackButtonSetter() {
         actionBlackButtonPanel = new JPanel();
@@ -615,6 +638,8 @@ public class MainGUI {
         actionBlackButtonPanel.setBackground(Color.WHITE);
         actionBlackButtonPanel.setBounds(350, 100, 80, 35);
         accessorizePanel.add(actionBlackButtonPanel, Integer.valueOf(2));
+        actionBlackButton.setActionCommand("black");
+        actionBlackButton.addActionListener(aacListener);
     }
 
     public void actionAccessoryWhiteButtonSetter() {
@@ -627,6 +652,8 @@ public class MainGUI {
         actionWhiteButton.setBorderPainted(false);
         actionWhiteButtonPanel.setBounds(530, 100, 80, 35);
         accessorizePanel.add(actionWhiteButtonPanel, Integer.valueOf(2));
+        actionWhiteButton.setActionCommand("white");
+        actionWhiteButton.addActionListener(aacListener);
     }
 
     public void actionAccessorySilverButtonSetter() {
@@ -640,6 +667,8 @@ public class MainGUI {
         actionSilverButtonPanel.setBackground(Color.WHITE);
         actionSilverButtonPanel.setBounds(395, 140, 80, 35);
         accessorizePanel.add(actionSilverButtonPanel, Integer.valueOf(2));
+        actionSilverButton.setActionCommand("silver");
+        actionSilverButton.addActionListener(aacListener);
     }
 
     public void actionAccessoryGoldButtonSetter() {
@@ -652,6 +681,8 @@ public class MainGUI {
         actionGoldButtonPanel.setBackground(Color.WHITE);
         actionGoldButtonPanel.setBounds(485, 140, 80, 35);
         accessorizePanel.add(actionGoldButtonPanel, Integer.valueOf(2));
+        actionGoldButton.setActionCommand("gold");
+        actionGoldButton.addActionListener(aacListener);
     }
 
     public void actionAccessoryPlainButtonSetter() {
@@ -661,6 +692,8 @@ public class MainGUI {
         actionPlainButtonPanel.setBackground(Color.WHITE);
         actionPlainButtonPanel.setBounds(440, 100, 80, 35);
         accessorizePanel.add(actionPlainButtonPanel, Integer.valueOf(2));
+        actionPlainButton.setActionCommand("plain");
+        actionPlainButton.addActionListener(aacListener);
     }
 
 
@@ -720,7 +753,9 @@ public class MainGUI {
         backgroundLabel.setBounds(0,0,320,360);
         snowPanel.add(backgroundLabel, Integer.valueOf(1));
 
-        JLabel snowLabel = new JLabel(new ImageIcon(petHome.getFirstPet().getAppearance().getBigImagePath()));
+        String snowAppearance = givePetAppearance(0);
+        System.out.println(givePetAppearance(0));
+        JLabel snowLabel = new JLabel(new ImageIcon(snowAppearance));
         snowLabel.setBounds(0,0,320,360);
         snowPanel.add(snowLabel, Integer.valueOf(2));
 
@@ -980,6 +1015,21 @@ public class MainGUI {
         impulsiveButton.addActionListener(new PersonalityClickerListener(Personality.IMPULSIVE));
     }
 
+    public String givePetAppearance(int num) {
+        String petAccessoryString = "";
+        if (petHome.getPets().get(num).getAppearance().equals(Appearance.SNOW)) {
+            petAccessoryString = petHome.getPets().get(num).getAccessory().getSnowTypeImagePath();
+        } 
+        if (petHome.getPets().get(num).getAppearance().equals(Appearance.PETTYPEONE)) {
+            petAccessoryString = petHome.getPets().get(num).getAccessory().getPetTypeOneImagePath();
+        } 
+        if (petHome.getPets().get(num).getAppearance().equals(Appearance.PETTYPETWO)) {
+            petAccessoryString = petHome.getPets().get(num).getAccessory().getPetTypeTwoImagePath();
+        }
+
+        return petAccessoryString;
+    }
+
     // methods for new Pet
 
     public void createNewPetScreen() {
@@ -999,7 +1049,8 @@ public class MainGUI {
         backgroundLabel.setBounds(0,0,320,360);
         newPetPanel.add(backgroundLabel, Integer.valueOf(1));
 
-        ImageIcon newPetImage = new ImageIcon(newPet.getAppearance().getBigImagePath());
+        String newPetAppearance = givePetAppearance(1);
+        ImageIcon newPetImage = new ImageIcon(newPetAppearance);
         JLabel newPetLabel = new JLabel(newPetImage);
         newPetLabel.setBounds(0,0,320,360);
         newPetPanel.add(newPetLabel, Integer.valueOf(2));
@@ -1031,7 +1082,8 @@ public class MainGUI {
         backgroundLabel.setBounds(0,0,320,360);
         newPetTwoPanel.add(backgroundLabel, Integer.valueOf(1));
 
-        ImageIcon newPetTwoImage = new ImageIcon(newPet2.getAppearance().getBigImagePath());
+        String newPetTwoAppearance = givePetAppearance(2);
+        ImageIcon newPetTwoImage = new ImageIcon(newPetTwoAppearance);
         JLabel newPetTwoLabel = new JLabel(newPetTwoImage);
         newPetTwoLabel.setBounds(0,0,320,360);
         newPetTwoPanel.add(newPetTwoLabel, Integer.valueOf(2));
@@ -1196,7 +1248,6 @@ public class MainGUI {
                 pane.remove(currentImageLabel);
             }
     
-            ImageIcon newPetImage = null;
 
             switch (yourChoice) {
                 case "snow":
@@ -1208,6 +1259,26 @@ public class MainGUI {
                 case "two":
                     newPetImage = new ImageIcon(petHome.getPets().get(2).getAppearance().getBigImagePath());
                     break;
+                case "black":
+                    selectedAppearance = givePetAccessorized(Accessory.BLACK);
+                    newPetImage = new ImageIcon(selectedAppearance);
+                    break;
+                case "white":
+                    selectedAppearance = givePetAccessorized(Accessory.WHITE);
+                    newPetImage = new ImageIcon(selectedAppearance);
+                    break;
+                case "silver":
+                    selectedAppearance = givePetAccessorized(Accessory.SILVER);
+                    newPetImage = new ImageIcon(selectedAppearance);
+                    break;
+                case "gold":
+                    selectedAppearance = givePetAccessorized(Accessory.GOLD);
+                    newPetImage = new ImageIcon(selectedAppearance);
+                    break;
+                case "plain":
+                    selectedAppearance = givePetAccessorized(Accessory.PLAIN);
+                    newPetImage = new ImageIcon(selectedAppearance);
+                    break;
             }
     
             if (newPetImage != null) {
@@ -1218,12 +1289,35 @@ public class MainGUI {
             }
             
         }
+
+        public String givePetAccessorized(Accessory accessory) {
+            String petAccessorizedString = "";
+            if (selectedPet.getAppearance().equals(Appearance.SNOW)) {
+                petAccessorizedString = accessory.getSnowTypeImagePath();
+            } 
+            if (selectedPet.getAppearance().equals(Appearance.PETTYPEONE)) {
+                petAccessorizedString = accessory.getPetTypeOneImagePath();
+            } 
+            if (selectedPet.getAppearance().equals(Appearance.PETTYPETWO)) {
+                petAccessorizedString = accessory.getPetTypeTwoImagePath();
+            }
+    
+            return petAccessorizedString;
+        }
+    }
+
+    private class AccessorizeSubmitButtonListener implements ActionListener {
+        
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            selectedPet.setAccessory(selectedAppearance);
+            System.out.println(petHome.getFirstPet().getAccessory());
+            createPetHomeMainScreen();
+        }
     }
 
     private class ActionFeedingSelectedPet implements ActionListener {
-
-        public ActionFeedingSelectedPet() {
-        }
 
         @Override 
         public void actionPerformed(ActionEvent event) {
@@ -1271,7 +1365,6 @@ public class MainGUI {
         }
     }
 
-   
 
     public class SubmitButtonHandler implements ActionListener {
 
