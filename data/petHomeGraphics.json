@@ -6,21 +6,21 @@
         "name": "Snow",
         "stomach": 0,
         "livingStatus": "alive",
-        "accessory": "SILVER",
+        "accessory": "PLAIN",
         "age": 10,
-        "story": "Snow was found near the inventory.",
+        "story": "Snow was found when you discovered the inventory box that the Canada Space Agency sent you for research of Alien.",
         "stomachStatus": "hungry"
     },
     {
         "appearance": "PETTYPEONE",
-        "personality": "IMPULSIVE",
-        "identity": "002",
-        "name": "Suki",
-        "stomach": 0,
+        "personality": "KIND",
+        "identity": "0905",
+        "name": "Zayne",
+        "stomach": 10,
         "livingStatus": "alive",
-        "accessory": "WHITE",
-        "age": 180,
-        "story": "I found her near UBC.",
-        "stomachStatus": "hungry"
+        "accessory": "GOLD",
+        "age": 27,
+        "story": "He is made of snow.",
+        "stomachStatus": "half-full"
     }
 ]}

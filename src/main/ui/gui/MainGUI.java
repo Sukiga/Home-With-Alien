@@ -224,7 +224,7 @@ public class MainGUI {
 
         this.petHome = new PetHomes();
         this.inventory = new Inventory();
-        Alien snow = new Alien("Snow", 10, "001", "Snow was found near the inventory.");
+        Alien snow = new Alien("Snow", 10, "001", "Snow was found when you discovered the inventory box that the Canada Space Agency sent you for research of Alien.");
         snow.setAppearance(Appearance.SNOW);
         snow.setPersonality(Personality.IMPULSIVE);
         petHome.addPets(snow);
@@ -317,9 +317,10 @@ public class MainGUI {
     
         backgroundStoryArea = new JTextArea("\nWelcome to Home with Aliens!" 
         + "\nAs the Valedictorian of UBC 2027, \nYou have been selected to represent Canada\n to live on Mars!!!"
-        + "\nYou are now exploring your home on Mars."
-        + "\nExplore Your Home!\n");
-        backgroundStoryArea.setBounds(100,40,440,160);
+        + "\nYou are now exploring your home on Mars"
+        + "\nand you found some aliens around."
+        + "\nCollect and take care of the Aliens!\n");        
+        backgroundStoryArea.setBounds(100,40,440,200);
         backgroundStoryArea.setLineWrap(true);
         backgroundStoryArea.setBackground(Color.black);
         backgroundStoryArea.setForeground(Color.white);
@@ -856,7 +857,7 @@ public class MainGUI {
     public void showPetStoryInfo(int n) {
         String story = petHome.getPets().get(n).getStory();
         petStoryArea = new JTextArea("BACKGROUND: " + story);
-        petStoryArea.setBounds(330, 210, 250, 40);
+        petStoryArea.setBounds(330, 210, 250, 70);
         petStoryArea.setLineWrap(true);
         petStoryArea.setWrapStyleWord(true);
         petStoryArea.setForeground(Color.BLACK);
